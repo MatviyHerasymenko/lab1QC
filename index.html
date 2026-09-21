@@ -1,0 +1,868 @@
+﻿<!DOCTYPE html>
+<html lang=uk>
+<head>
+    <meta charset=UTF-8>
+    <meta name=viewport content=width=device-width, initial-scale=1.0>
+    <title>Лабораторна робота: UI Елементи управління</title>
+    <!-- Google Fonts -->
+    <link rel=preconnect href=https://fonts.googleapis.com>
+    <link rel=preconnect href=https://fonts.gstatic.com crossorigin>
+    <link href=https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap rel=stylesheet>
+    
+    <style>
+        :root {
+            --bg-body: #f4f7fb;
+            --card-bg: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --primary: #4f46e5;
+            --primary-light: #eef2ff;
+            --primary-hover: #4338ca;
+            --border-color: #e2e8f0;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --shadow-subtle: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
+            --shadow-hover: 0 10px 25px -4px rgba(0, 0, 0, 0.08);
+            --transition: all 0.25s ease;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(180deg, #f8fafc 0%, #eef2f6 100%);
+            color: var(--text-main);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 40px 20px 80px 20px;
+        }
+
+        .wrapper {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 44px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: var(--primary-light);
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 0.85rem;
+            padding: 6px 16px;
+            border-radius: 9999px;
+            margin-bottom: 14px;
+            letter-spacing: 0.03em;
+            text-transform: uppercase;
+        }
+
+        h1 {
+            font-size: 2.3rem;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 12px;
+            letter-spacing: -0.02em;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            max-width: 650px;
+            margin: 0 auto;
+        }
+
+        .nav-pills {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px;
+            margin: 28px auto;
+            max-width: 820px;
+        }
+
+        .nav-pills a {
+            text-decoration: none;
+            color: var(--text-muted);
+            background: #fff;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+        }
+
+        .nav-pills a:hover {
+            color: var(--primary);
+            border-color: var(--primary);
+            background: var(--primary-light);
+        }
+
+        .controls-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 28px;
+        }
+
+        .control-card {
+            background: var(--card-bg);
+            border-radius: var(--radius-lg);
+            padding: 26px 30px;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-subtle);
+            transition: var(--transition);
+        }
+
+        .control-card:hover {
+            box-shadow: var(--shadow-hover);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 10px;
+        }
+
+        .element-number {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            background: var(--primary-light);
+            color: var(--primary);
+            font-weight: 700;
+            border-radius: 8px;
+            font-size: 0.95rem;
+        }
+
+        .card-header h2 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #1e293b;
+        }
+
+        .description {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+            line-height: 1.55;
+        }
+
+        .description strong {
+            color: #334155;
+        }
+
+        .showcase-area {
+            background: #f8fafc;
+            border-radius: var(--radius-md);
+            padding: 18px 22px;
+            border: 1px dashed #cbd5e1;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .showcase-label {
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #94a3b8;
+            font-weight: 700;
+        }
+
+        .demo-row {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        /* 1. Radio */
+        .radio-group {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .custom-radio {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            color: #334155;
+            user-select: none;
+        }
+
+        .custom-radio input[type=radio] {
+            accent-color: var(--primary);
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+
+        /* 2. Checkbox */
+        .checkbox-group {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .custom-checkbox {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            color: #334155;
+            user-select: none;
+        }
+
+        .custom-checkbox input[type=checkbox] {
+            accent-color: var(--primary);
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+
+        /* 3. Text Input */
+        .input-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            width: 100%;
+            max-width: 340px;
+        }
+
+        .text-input {
+            width: 100%;
+            padding: 10px 14px;
+            border-radius: 8px;
+            border: 1px solid #cbd5e1;
+            font-size: 0.95rem;
+            font-family: inherit;
+            color: var(--text-main);
+            background: #ffffff;
+            transition: var(--transition);
+            outline: none;
+        }
+
+        .text-input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+        }
+
+        .text-input:disabled {
+            background: #f1f5f9;
+            cursor: not-allowed;
+        }
+
+        /* 4. Tabs */
+        .tabs-container {
+            width: 100%;
+        }
+
+        .tabs-header {
+            display: flex;
+            border-bottom: 2px solid #e2e8f0;
+            gap: 8px;
+        }
+
+        .tab-btn {
+            background: none;
+            border: none;
+            padding: 9px 20px;
+            font-size: 0.92rem;
+            font-weight: 600;
+            font-family: inherit;
+            color: var(--text-muted);
+            cursor: pointer;
+            position: relative;
+            transition: var(--transition);
+            bottom: -2px;
+        }
+
+        .tab-btn:hover {
+            color: var(--primary);
+        }
+
+        .tab-btn.active {
+            color: var(--primary);
+            border-bottom: 2px solid var(--primary);
+        }
+
+        .tab-content {
+            background: #ffffff;
+            padding: 16px;
+            border-radius: 0 0 8px 8px;
+            border: 1px solid #e2e8f0;
+            border-top: none;
+            font-size: 0.92rem;
+            color: #475569;
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* 5. Button */
+        .btn-variants {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 9px 20px;
+            font-size: 0.92rem;
+            font-weight: 600;
+            font-family: inherit;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: var(--transition);
+            border: 1px solid transparent;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: #ffffff;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-hover);
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            background: #ffffff;
+            color: #334155;
+            border-color: #cbd5e1;
+        }
+
+        .btn-secondary:hover {
+            background: #f8fafc;
+            border-color: #94a3b8;
+        }
+
+        .btn-danger {
+            background: #fee2e2;
+            color: #b91c1c;
+        }
+
+        .btn-danger:hover {
+            background: #fecaca;
+        }
+
+        /* 6. Text Label */
+        .labels-demo {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 12px;
+            border-radius: 9999px;
+            font-size: 0.82rem;
+            font-weight: 600;
+        }
+
+        .badge-success { background: #dcfce7; color: #15803d; }
+        .badge-warning { background: #fef3c7; color: #b45309; }
+        .badge-info { background: #e0f2fe; color: #0369a1; }
+
+        /* 7. Link */
+        .links-demo {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            font-size: 0.95rem;
+        }
+
+        .custom-link {
+            color: var(--primary);
+            text-decoration: underline;
+            text-underline-offset: 4px;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .custom-link:hover {
+            color: var(--primary-hover);
+        }
+
+        .custom-link.subtle {
+            text-decoration: none;
+            color: #475569;
+        }
+
+        .custom-link.subtle:hover {
+            color: var(--primary);
+            text-decoration: underline;
+        }
+
+        /* 8. Tooltip */
+        .tooltip-container {
+            position: relative;
+            display: inline-block;
+        }
+
+        .tooltip-target {
+            padding: 8px 16px;
+            background: #ffffff;
+            border: 1px dashed #6366f1;
+            border-radius: 8px;
+            font-size: 0.92rem;
+            font-weight: 500;
+            color: #4338ca;
+            cursor: pointer;
+        }
+
+        .tooltip-text {
+            visibility: hidden;
+            opacity: 0;
+            width: 220px;
+            background-color: #1e293b;
+            color: #f8fafc;
+            text-align: center;
+            border-radius: 6px;
+            padding: 8px 12px;
+            position: absolute;
+            z-index: 10;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%);
+            transition: opacity 0.3s, visibility 0.3s;
+            font-size: 0.8rem;
+            line-height: 1.4;
+            pointer-events: none;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .tooltip-text::after {
+            content: ";
+ position: absolute;
+ top: 100%;
+ left: 50%;
+ margin-left: -5px;
+ border-width: 5px;
+ border-style: solid;
+ border-color: #1e293b transparent transparent transparent;
+ }
+
+ .tooltip-container:hover .tooltip-text {
+ visibility: visible;
+ opacity: 1;
+ }
+
+ /* 9. Dropdown */
+ .dropdown-wrapper {
+ max-width: 320px;
+ width: 100%;
+ }
+
+ .custom-select {
+ width: 100%;
+ padding: 10px 14px;
+ border-radius: 8px;
+ border: 1px solid #cbd5e1;
+ background-color: #ffffff;
+ font-family: inherit;
+ font-size: 0.95rem;
+ color: var(--text-main);
+ outline: none;
+ cursor: pointer;
+ transition: var(--transition);
+ }
+
+ .custom-select:focus {
+ border-color: var(--primary);
+ box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+ }
+
+ /* 10. Data Grid */
+ .table-responsive {
+ width: 100%;
+ overflow-x: auto;
+ border-radius: 8px;
+ border: 1px solid #e2e8f0;
+ background: #ffffff;
+ }
+
+ .data-grid-table {
+ width: 100%;
+ border-collapse: collapse;
+ text-align: left;
+ font-size: 0.9rem;
+ }
+
+ .data-grid-table th {
+ background: #f8fafc;
+ padding: 12px 16px;
+ font-weight: 600;
+ color: #475569;
+ border-bottom: 1px solid #e2e8f0;
+ }
+
+ .data-grid-table td {
+ padding: 12px 16px;
+ border-bottom: 1px solid #f1f5f9;
+ color: #334155;
+ }
+
+ .data-grid-table tr:hover td {
+ background-color: #f8fafc;
+ }
+
+ .data-grid-table tr:last-child td {
+ border-bottom: none;
+ }
+
+ footer {
+ margin-top: 50px;
+ text-align: center;
+ color: var(--text-muted);
+ font-size: 0.9rem;
+ border-top: 1px solid #e2e8f0;
+ padding-top: 24px;
+ }
+ </style>
+</head>
+<body>
+
+ <div class=wrapper>
+ <header>
+ <div class=badge>Лабораторна робота 1</div>
+ 
+ <div class=nav-pills>
+ <a href=#radio>1. Radiobutton</a>
+ <a href=#checkbox>2. Checkbox</a>
+ <a href=#text-input>3. Text Input</a>
+ <a href=#tabs>4. Tabs</a>
+ <a href=#button>5. Button</a>
+ <a href=#label>6. Text Label</a>
+ <a href=#link>7. Link</a>
+ <a href=#tooltip>8. Tooltip</a>
+ <a href=#dropdown>9. Dropdown</a>
+ <a href=#datagrid>10. Data Grid</a>
+ </div>
+ </header>
+
+ <main class=controls-grid>
+
+ <!-- 1. Radiobutton -->
+ <section class=control-card id=radio>
+ <div class=card-header>
+ <span class=element-number>1</span>
+ <h2>Radiobutton</h2>
+ </div>
+ <div class=description>
+ <strong>Призначення:</strong> Дозволяє користувачу вибрати лише <em>один</em> взаємовиключний варіант із заздалегідь визначеного списку опцій. Вибір будь-якого нового перемикача автоматично знімає відмітку з попереднього у межах однієї групи (атрибут <code>name</code>).
+ </div>
+ <div class=showcase-area>
+ <span class=showcase-label>Інтерактивний приклад:</span>
+ <div class=radio-group>
+ <label class=custom-radio>
+ <input type=radio name=plan value=free checked>
+ Базовий (Free)
+ </label>
+ <label class=custom-radio>
+ <input type=radio name=plan value=pro>
+ Професійний (Pro)
+ </label>
+ <label class=custom-radio>
+ <input type=radio name=plan value=enterprise>
+ Корпоративний (Enterprise)
+ </label>
+ </div>
+ </div>
+ </section>
+
+ <!-- 2. Checkbox -->
+ <section class=control-card id=checkbox>
+ <div class=card-header>
+ <span class=element-number>2</span>
+ <h2>Checkbox</h2>
+ </div>
+ <div class=description>
+ <strong>Призначення:</strong> Дозволяє користувачу обрати <em>декілька</em> варіантів одночасно (або жодного), а також увімкнути чи вимкнути окрему незалежну бінарну опцію (наприклад, погодження з правилами сайту).
+ </div>
+ <div class=showcase-area>
+ <span class=showcase-label>Інтерактивний приклад:</span>
+ <div class=checkbox-group>
+ <label class=custom-checkbox>
+ <input type=checkbox checked>
+ Email-сповіщення
+ </label>
+ <label class=custom-checkbox>
+ <input type=checkbox>
+ SMS-інформування
+ </label>
+ <label class=custom-checkbox>
+ <input type=checkbox checked>
+ Щотижневий дайджест
+ </label>
+ </div>
+ </div>
+ </section>
+
+ <!-- 3. Text input -->
+ <section class=control-card id=text-input>
+ <div class=card-header>
+ <span class=element-number>3</span>
+ <h2>Text Input </h2>
+ </div>
+ <div class=description>
+ <strong>Призначення:</strong> Забезпечує введення довільних текстових даних користувачем: імені, логіна, адреси електронної пошти, пароля чи пошукового запиту.
+ </div>
+ <div class=showcase-area>
+ <span class=showcase-label>Інтерактивний приклад:</span>
+ <div class=demo-row>
+ <div class=input-wrapper>
+ <label for=example-email style=font-size: 0.85rem; font-weight: 600; color: #475569;>Електронна пошта</label>
+ <input type=email id=example-email class=text-input placeholder=user@example.com>
+ </div>
+ <div class=input-wrapper>
+ <label for=example-disabled style=font-size: 0.85rem; font-weight: 600; color: #94a3b8;>Неактивне поле (disabled)</label>
+ <input type=text id=example-disabled class=text-input value=Редагування заборонено disabled>
+ </div>
+ </div>
+ </div>
+ </section>
+
+ <!-- 4. Tabs -->
+ <section class=control-card id=tabs>
+ <div class=card-header>
+ <span class=element-number>4</span>
+ <h2>Tabs</h2>
+ </div>
+ <div class=description>
+ <strong>Призначення:</strong> Організовують та логічно структурують вміст сторінки за категоріями в межах однієї секції, дозволяючи користувачеві перемикатися між ними без перезавантаження всієї сторінки.
+ </div>
+ <div class=showcase-area>
+ <span class=showcase-label>Інтерактивний приклад:</span>
+ <div class=tabs-container>
+ <div class=tabs-header>
+ <button class=tab-btn active onclick=switchTab(event, 'tab-profile')>Профіль</button>
+ <button class=tab-btn onclick=switchTab(event, 'tab-security')>Безпека</button>
+ <button class=tab-btn onclick=switchTab(event, 'tab-billing')>Підписка</button>
+ </div>
+ <div id=tab-profile class=tab-content active>
+ Налаштування публічної інформації користувача, зміна фотографії та контактних даних.
+ </div>
+ <div id=tab-security class=tab-content>
+ Керування безпекою: зміна паролю, активні сесії та налаштування двофакторної автентифікації (2FA).
+ </div>
+ <div id=tab-billing class=tab-content>
+ Історія фінансових транзакцій, виставлені інвойси та керування прив'язаними картами.
+ </div>
+ </div>
+ </div>
+ </section>
+
+ <!-- 5. Button -->
+ <section class=control-card id=button>
+ <div class=card-header>
+ <span class=element-number>5</span>
+ <h2>Button </h2>
+ </div>
+ <div class=description>
+ <strong>Призначення:</strong> Слугує для ініціації певної дії користувачем: відправки форми, збереження налаштувань, відкриття чи закриття вікон, підтвердження або скасування операції.
+ </div>
+ <div class=showcase-area>
+ <span class=showcase-label>Інтерактивний приклад:</span>
+ <div class=btn-variants>
+ <button class=btn btn-primary onclick=alert('Дію виконано успішно!')>Зберегти зміни</button>
+ <button class=btn btn-secondary>Скасувати</button>
+ <button class=btn btn-danger>Видалити акаунт</button>
+ </div>
+ </div>
+ </section>
+
+ <!-- 6. Text label -->
+ <section class=control-card id=label>
+ <div class=card-header>
+ <span class=element-number>6</span>
+ <h2>Text Label</h2>
+ </div>
+ <div class=description>
+ <strong>Призначення:</strong> Забезпечує текстовий підпис до інших елементів управління (покращуючи юзабіліті та доступність через <code>&lt;label for=...&gt;</code>) або відображає стислий стан системи у вигляді тегів і бейджів.
+ </div>
+ <div class=showcase-area>
+ <span class=showcase-label>Інтерактивний приклад:</span>
+ <div class=labels-demo>
+ <span class=status-badge badge-success>● Активний</span>
+ <span class=status-badge badge-warning>⏳ В очікуванні</span>
+ <span class=status-badge badge-info>ℹ Новий реліз</span>
+ <label style=font-weight: 600; color: #475569; font-size: 0.9rem;>Мітка пов'язаного поля (Accessible label)</label>
+ </div>
+ </div>
+ </section>
+
+ <!-- 7. Link -->
+ <section class=control-card id=link>
+ <div class=card-header>
+ <span class=element-number>7</span>
+ <h2>Link </h2>
+ </div>
+ <div class=description>
+ <strong>Призначення:</strong> Навігаційний компонент, який забезпечує перехід на іншу сторінку, відкриття зовнішнього веб-ресурсу, завантаження файлу або плавний скрол до потрібного блоку на поточній сторінці (якірні лінки).
+ </div>
+ <div class=showcase-area>
+ <span class=showcase-label>Інтерактивний приклад:</span>
+ <div class=links-demo>
+ <a href=https://github.com target=_blank rel=noopener noreferrer class=custom-link>Перейти на GitHub ↗</a>
+ <a href=#radio class=custom-link subtle>Повернутися нагору ↑</a>
+ <a href=https://developer.mozilla.org target=_blank rel=noopener noreferrer class=custom-link>Документація MDN Web Docs ↗</a>
+ </div>
+ </div>
+ </section>
+
+ <!-- 8. Tooltip -->
+ <section class=control-card id=tooltip>
+ <div class=card-header>
+ <span class=element-number>8</span>
+ <h2>Tooltip</h2>
+ </div>
+ <div class=description>
+ <strong>Призначення:</strong> Відображає коротку контекстну довідку чи пояснення при наведенні курсора миші (hover) або фокусуванні на елементі, заощаджуючи простір основного інтерфейсу.
+ </div>
+ <div class=showcase-area>
+ <span class=showcase-label>Інтерактивний приклад (наведіть курсор):</span>
+ <div class=demo-row>
+ <div class=tooltip-container>
+ <span class=tooltip-target>Наведіть на мене курсор 🔍</span>
+ <span class=tooltip-text>Це спливаюча підказка (Tooltip), яка містить роз'яснення чи підказку до інтерфейсу!</span>
+ </div>
+ </div>
+ </div>
+ </section>
+
+ <!-- 9. Dropdown list -->
+ <section class=control-card id=dropdown>
+ <div class=card-header>
+ <span class=element-number>9</span>
+ <h2>Dropdown List</h2>
+ </div>
+ <div class=description>
+ <strong>Призначення:</strong> Компактно відображає великий перелік варіантів вибору у згорнутому вигляді. При кліку розгортає меню вибору одного або декількох пунктів.
+ </div>
+ <div class=showcase-area>
+ <span class=showcase-label>Інтерактивний приклад:</span>
+ <div class=dropdown-wrapper>
+ <select class=custom-select>
+ <option value= disabled selected>Оберіть технологію...</option>
+ <option value=html>HTML5 / Web API</option>
+ <option value=css>CSS3 / Modern Layouts</option>
+ <option value=js>JavaScript (ES6+)</option>
+ <option value=ts>TypeScript</option>
+ <option value=react>React Framework</option>
+ </select>
+ </div>
+ </div>
+ </section>
+
+ <!-- 10. Data grid -->
+ <section class=control-card id=datagrid>
+ <div class=card-header>
+ <span class=element-number>10</span>
+ <h2>Data Grid</h2>
+ </div>
+ <div class=description>
+ <strong>Призначення:</strong> Забезпечує структуроване представлення даних у вигляді рядків і колонок. У повноцінних інтерфейсах Data Grid також підтримує сортування, пагінацію та фільтрацію великих масивів інформації.
+ </div>
+ <div class=showcase-area>
+ <span class=showcase-label>Інтерактивний приклад:</span>
+ <div class=table-responsive>
+ <table class=data-grid-table>
+ <thead>
+ <tr>
+ <th>ID</th>
+ <th>Елемент</th>
+ <th>Категорія</th>
+ <th>Тип вибору</th>
+ <th>Статус</th>
+ </tr>
+ </thead>
+ <tbody>
+ <tr>
+ <td>#001</td>
+ <td>Radiobutton</td>
+ <td>Вибір</td>
+ <td>Один із багатьох</td>
+ <td><span class=status-badge badge-success>Реалізовано</span></td>
+ </tr>
+ <tr>
+ <td>#002</td>
+ <td>Checkbox</td>
+ <td>Вибір</td>
+ <td>Множинний вибір</td>
+ <td><span class=status-badge badge-success>Реалізовано</span></td>
+ </tr>
+ <tr>
+ <td>#003</td>
+ <td>Text Input</td>
+ <td>Введення</td>
+ <td>Текстове поле</td>
+ <td><span class=status-badge badge-success>Реалізовано</span></td>
+ </tr>
+ <tr>
+ <td>#004</td>
+ <td>Tabs</td>
+ <td>Навігація</td>
+ <td>Перемикання контенту</td>
+ <td><span class=status-badge badge-success>Реалізовано</span></td>
+ </tr>
+ <tr>
+ <td>#005</td>
+ <td>Data Grid</td>
+ <td>Відображення</td>
+ <td>Табличне представлення</td>
+ <td><span class=status-badge badge-success>Реалізовано</span></td>
+ </tr>
+ </tbody>
+ </table>
+ </div>
+ </div>
+ </section>
+
+ </main>
+
+ <footer>
+ <p>Лабораторна робота: Дослідження та практична реалізація UI Controls • 2026</p>
+ </footer>
+ </div>
+
+ <!-- Tab Switching Logic -->
+ <script>
+ function switchTab(evt, tabId) {
+ const tabContents = document.querySelectorAll('.tab-content');
+ tabContents.forEach(content => content.classList.remove('active'));
+
+ const tabButtons = document.querySelectorAll('.tab-btn');
+ tabButtons.forEach(btn => btn.classList.remove('active'));
+
+ document.getElementById(tabId).classList.add('active');
+ evt.currentTarget.classList.add('active');
+ }
+ </script>
+</body>
+</html>
