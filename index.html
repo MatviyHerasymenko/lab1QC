@@ -1,13 +1,13 @@
-﻿<!DOCTYPE html>
-<html lang=uk>
+<!DOCTYPE html>
+<html lang="uk">
 <head>
-    <meta charset=UTF-8>
-    <meta name=viewport content=width=device-width, initial-scale=1.0>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Лабораторна робота: UI Елементи управління</title>
     <!-- Google Fonts -->
-    <link rel=preconnect href=https://fonts.googleapis.com>
-    <link rel=preconnect href=https://fonts.gstatic.com crossorigin>
-    <link href=https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap rel=stylesheet>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     
     <style>
         :root {
@@ -204,7 +204,7 @@
             user-select: none;
         }
 
-        .custom-radio input[type=radio] {
+        .custom-radio input[type="radio"] {
             accent-color: var(--primary);
             width: 18px;
             height: 18px;
@@ -228,7 +228,7 @@
             user-select: none;
         }
 
-        .custom-checkbox input[type=checkbox] {
+        .custom-checkbox input[type="checkbox"] {
             accent-color: var(--primary);
             width: 18px;
             height: 18px;
@@ -281,7 +281,7 @@
         .tab-btn {
             background: none;
             border: none;
-            padding: 9px 20px;
+            padding: 10px 20px;
             font-size: 0.92rem;
             font-weight: 600;
             font-family: inherit;
@@ -290,6 +290,7 @@
             position: relative;
             transition: var(--transition);
             bottom: -2px;
+            border-bottom: 2px solid transparent;
         }
 
         .tab-btn:hover {
@@ -303,7 +304,7 @@
 
         .tab-content {
             background: #ffffff;
-            padding: 16px;
+            padding: 18px 20px;
             border-radius: 0 0 8px 8px;
             border: 1px solid #e2e8f0;
             border-top: none;
@@ -321,13 +322,14 @@
             display: flex;
             gap: 12px;
             flex-wrap: wrap;
+            align-items: center;
         }
 
         .btn {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            padding: 9px 20px;
+            padding: 10px 22px;
             font-size: 0.92rem;
             font-weight: 600;
             font-family: inherit;
@@ -335,6 +337,11 @@
             cursor: pointer;
             transition: var(--transition);
             border: 1px solid transparent;
+            user-select: none;
+        }
+
+        .btn:active {
+            transform: scale(0.97);
         }
 
         .btn-primary {
@@ -344,7 +351,6 @@
 
         .btn-primary:hover {
             background: var(--primary-hover);
-            transform: translateY(-1px);
         }
 
         .btn-secondary {
@@ -361,10 +367,30 @@
         .btn-danger {
             background: #fee2e2;
             color: #b91c1c;
+            border-color: #fecaca;
         }
 
         .btn-danger:hover {
             background: #fecaca;
+            color: #991b1b;
+        }
+
+        .button-log {
+            margin-top: 10px;
+            padding: 10px 14px;
+            background: #ffffff;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+            font-size: 0.88rem;
+            color: #475569;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .button-log span {
+            font-weight: 600;
+            color: var(--primary);
         }
 
         /* 6. Text Label */
@@ -458,406 +484,429 @@
         }
 
         .tooltip-text::after {
-            content: ";
- position: absolute;
- top: 100%;
- left: 50%;
- margin-left: -5px;
- border-width: 5px;
- border-style: solid;
- border-color: #1e293b transparent transparent transparent;
- }
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: #1e293b transparent transparent transparent;
+        }
 
- .tooltip-container:hover .tooltip-text {
- visibility: visible;
- opacity: 1;
- }
+        .tooltip-container:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
+        }
 
- /* 9. Dropdown */
- .dropdown-wrapper {
- max-width: 320px;
- width: 100%;
- }
+        /* 9. Dropdown */
+        .dropdown-wrapper {
+            max-width: 320px;
+            width: 100%;
+        }
 
- .custom-select {
- width: 100%;
- padding: 10px 14px;
- border-radius: 8px;
- border: 1px solid #cbd5e1;
- background-color: #ffffff;
- font-family: inherit;
- font-size: 0.95rem;
- color: var(--text-main);
- outline: none;
- cursor: pointer;
- transition: var(--transition);
- }
+        .custom-select {
+            width: 100%;
+            padding: 10px 14px;
+            border-radius: 8px;
+            border: 1px solid #cbd5e1;
+            background-color: #ffffff;
+            font-family: inherit;
+            font-size: 0.95rem;
+            color: var(--text-main);
+            outline: none;
+            cursor: pointer;
+            transition: var(--transition);
+        }
 
- .custom-select:focus {
- border-color: var(--primary);
- box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
- }
+        .custom-select:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+        }
 
- /* 10. Data Grid */
- .table-responsive {
- width: 100%;
- overflow-x: auto;
- border-radius: 8px;
- border: 1px solid #e2e8f0;
- background: #ffffff;
- }
+        /* 10. Data Grid */
+        .table-responsive {
+            width: 100%;
+            overflow-x: auto;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+            background: #ffffff;
+        }
 
- .data-grid-table {
- width: 100%;
- border-collapse: collapse;
- text-align: left;
- font-size: 0.9rem;
- }
+        .data-grid-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 0.9rem;
+        }
 
- .data-grid-table th {
- background: #f8fafc;
- padding: 12px 16px;
- font-weight: 600;
- color: #475569;
- border-bottom: 1px solid #e2e8f0;
- }
+        .data-grid-table th {
+            background: #f8fafc;
+            padding: 12px 16px;
+            font-weight: 600;
+            color: #475569;
+            border-bottom: 1px solid #e2e8f0;
+        }
 
- .data-grid-table td {
- padding: 12px 16px;
- border-bottom: 1px solid #f1f5f9;
- color: #334155;
- }
+        .data-grid-table td {
+            padding: 12px 16px;
+            border-bottom: 1px solid #f1f5f9;
+            color: #334155;
+        }
 
- .data-grid-table tr:hover td {
- background-color: #f8fafc;
- }
+        .data-grid-table tr:hover td {
+            background-color: #f8fafc;
+        }
 
- .data-grid-table tr:last-child td {
- border-bottom: none;
- }
+        .data-grid-table tr:last-child td {
+            border-bottom: none;
+        }
 
- footer {
- margin-top: 50px;
- text-align: center;
- color: var(--text-muted);
- font-size: 0.9rem;
- border-top: 1px solid #e2e8f0;
- padding-top: 24px;
- }
- </style>
+        footer {
+            margin-top: 50px;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid #e2e8f0;
+            padding-top: 24px;
+        }
+    </style>
 </head>
 <body>
 
- <div class=wrapper>
- <header>
- <div class=badge>Лабораторна робота 1</div>
- 
- <div class=nav-pills>
- <a href=#radio>1. Radiobutton</a>
- <a href=#checkbox>2. Checkbox</a>
- <a href=#text-input>3. Text Input</a>
- <a href=#tabs>4. Tabs</a>
- <a href=#button>5. Button</a>
- <a href=#label>6. Text Label</a>
- <a href=#link>7. Link</a>
- <a href=#tooltip>8. Tooltip</a>
- <a href=#dropdown>9. Dropdown</a>
- <a href=#datagrid>10. Data Grid</a>
- </div>
- </header>
+    <div class="wrapper">
+        <header>
+            <div class="badge">Лабораторна робота 1</div>
+            
+            <div class="nav-pills">
+                <a href="#radio">1. Radiobutton</a>
+                <a href="#checkbox">2. Checkbox</a>
+                <a href="#text-input">3. Text Input</a>
+                <a href="#tabs">4. Tabs</a>
+                <a href="#button">5. Button</a>
+                <a href="#label">6. Text Label</a>
+                <a href="#link">7. Link</a>
+                <a href="#tooltip">8. Tooltip</a>
+                <a href="#dropdown">9. Dropdown</a>
+                <a href="#datagrid">10. Data Grid</a>
+            </div>
+        </header>
 
- <main class=controls-grid>
+        <main class="controls-grid">
 
- <!-- 1. Radiobutton -->
- <section class=control-card id=radio>
- <div class=card-header>
- <span class=element-number>1</span>
- <h2>Radiobutton</h2>
- </div>
- <div class=description>
- <strong>Призначення:</strong> Дозволяє користувачу вибрати лише <em>один</em> взаємовиключний варіант із заздалегідь визначеного списку опцій. Вибір будь-якого нового перемикача автоматично знімає відмітку з попереднього у межах однієї групи (атрибут <code>name</code>).
- </div>
- <div class=showcase-area>
- <span class=showcase-label>Інтерактивний приклад:</span>
- <div class=radio-group>
- <label class=custom-radio>
- <input type=radio name=plan value=free checked>
- Базовий (Free)
- </label>
- <label class=custom-radio>
- <input type=radio name=plan value=pro>
- Професійний (Pro)
- </label>
- <label class=custom-radio>
- <input type=radio name=plan value=enterprise>
- Корпоративний (Enterprise)
- </label>
- </div>
- </div>
- </section>
+            <!-- 1. Radiobutton -->
+            <section class="control-card" id="radio">
+                <div class="card-header">
+                    <span class="element-number">1</span>
+                    <h2>Radiobutton</h2>
+                </div>
+                <div class="description">
+                    <strong>Призначення:</strong> Дозволяє користувачу вибрати лише <em>один</em> взаємовиключний варіант із заздалегідь визначеного списку опцій. Вибір будь-якого нового перемикача автоматично знімає відмітку з попереднього у межах однієї групи (атрибут <code>name</code>).
+                </div>
+                <div class="showcase-area">
+                    <span class="showcase-label">Інтерактивний приклад:</span>
+                    <div class="radio-group">
+                        <label class="custom-radio">
+                            <input type="radio" name="plan" value="free" checked>
+                            Базовий (Free)
+                        </label>
+                        <label class="custom-radio">
+                            <input type="radio" name="plan" value="pro">
+                            Професійний (Pro)
+                        </label>
+                        <label class="custom-radio">
+                            <input type="radio" name="plan" value="enterprise">
+                            Корпоративний (Enterprise)
+                        </label>
+                    </div>
+                </div>
+            </section>
 
- <!-- 2. Checkbox -->
- <section class=control-card id=checkbox>
- <div class=card-header>
- <span class=element-number>2</span>
- <h2>Checkbox</h2>
- </div>
- <div class=description>
- <strong>Призначення:</strong> Дозволяє користувачу обрати <em>декілька</em> варіантів одночасно (або жодного), а також увімкнути чи вимкнути окрему незалежну бінарну опцію (наприклад, погодження з правилами сайту).
- </div>
- <div class=showcase-area>
- <span class=showcase-label>Інтерактивний приклад:</span>
- <div class=checkbox-group>
- <label class=custom-checkbox>
- <input type=checkbox checked>
- Email-сповіщення
- </label>
- <label class=custom-checkbox>
- <input type=checkbox>
- SMS-інформування
- </label>
- <label class=custom-checkbox>
- <input type=checkbox checked>
- Щотижневий дайджест
- </label>
- </div>
- </div>
- </section>
+            <!-- 2. Checkbox -->
+            <section class="control-card" id="checkbox">
+                <div class="card-header">
+                    <span class="element-number">2</span>
+                    <h2>Checkbox</h2>
+                </div>
+                <div class="description">
+                    <strong>Призначення:</strong> Дозволяє користувачу обрати <em>декілька</em> варіантів одночасно (або жодного), а також увімкнути чи вимкнути окрему незалежну бінарну опцію (наприклад, погодження з правилами сайту).
+                </div>
+                <div class="showcase-area">
+                    <span class="showcase-label">Інтерактивний приклад:</span>
+                    <div class="checkbox-group">
+                        <label class="custom-checkbox">
+                            <input type="checkbox" checked>
+                            Email-сповіщення
+                        </label>
+                        <label class="custom-checkbox">
+                            <input type="checkbox">
+                            SMS-інформування
+                        </label>
+                        <label class="custom-checkbox">
+                            <input type="checkbox" checked>
+                            Щотижневий дайджест
+                        </label>
+                    </div>
+                </div>
+            </section>
 
- <!-- 3. Text input -->
- <section class=control-card id=text-input>
- <div class=card-header>
- <span class=element-number>3</span>
- <h2>Text Input </h2>
- </div>
- <div class=description>
- <strong>Призначення:</strong> Забезпечує введення довільних текстових даних користувачем: імені, логіна, адреси електронної пошти, пароля чи пошукового запиту.
- </div>
- <div class=showcase-area>
- <span class=showcase-label>Інтерактивний приклад:</span>
- <div class=demo-row>
- <div class=input-wrapper>
- <label for=example-email style=font-size: 0.85rem; font-weight: 600; color: #475569;>Електронна пошта</label>
- <input type=email id=example-email class=text-input placeholder=user@example.com>
- </div>
- <div class=input-wrapper>
- <label for=example-disabled style=font-size: 0.85rem; font-weight: 600; color: #94a3b8;>Неактивне поле (disabled)</label>
- <input type=text id=example-disabled class=text-input value=Редагування заборонено disabled>
- </div>
- </div>
- </div>
- </section>
+            <!-- 3. Text input -->
+            <section class="control-card" id="text-input">
+                <div class="card-header">
+                    <span class="element-number">3</span>
+                    <h2>Text Input</h2>
+                </div>
+                <div class="description">
+                    <strong>Призначення:</strong> Забезпечує введення довільних текстових даних користувачем: імені, логіна, адреси електронної пошти, пароля чи пошукового запиту.
+                </div>
+                <div class="showcase-area">
+                    <span class="showcase-label">Інтерактивний приклад:</span>
+                    <div class="demo-row">
+                        <div class="input-wrapper">
+                            <label for="example-email" style="font-size: 0.85rem; font-weight: 600; color: #475569;">Електронна пошта</label>
+                            <input type="email" id="example-email" class="text-input" placeholder="user@example.com">
+                        </div>
+                        <div class="input-wrapper">
+                            <label for="example-disabled" style="font-size: 0.85rem; font-weight: 600; color: #94a3b8;">Неактивне поле (disabled)</label>
+                            <input type="text" id="example-disabled" class="text-input" value="Редагування заборонено" disabled>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
- <!-- 4. Tabs -->
- <section class=control-card id=tabs>
- <div class=card-header>
- <span class=element-number>4</span>
- <h2>Tabs</h2>
- </div>
- <div class=description>
- <strong>Призначення:</strong> Організовують та логічно структурують вміст сторінки за категоріями в межах однієї секції, дозволяючи користувачеві перемикатися між ними без перезавантаження всієї сторінки.
- </div>
- <div class=showcase-area>
- <span class=showcase-label>Інтерактивний приклад:</span>
- <div class=tabs-container>
- <div class=tabs-header>
- <button class=tab-btn active onclick=switchTab(event, 'tab-profile')>Профіль</button>
- <button class=tab-btn onclick=switchTab(event, 'tab-security')>Безпека</button>
- <button class=tab-btn onclick=switchTab(event, 'tab-billing')>Підписка</button>
- </div>
- <div id=tab-profile class=tab-content active>
- Налаштування публічної інформації користувача, зміна фотографії та контактних даних.
- </div>
- <div id=tab-security class=tab-content>
- Керування безпекою: зміна паролю, активні сесії та налаштування двофакторної автентифікації (2FA).
- </div>
- <div id=tab-billing class=tab-content>
- Історія фінансових транзакцій, виставлені інвойси та керування прив'язаними картами.
- </div>
- </div>
- </div>
- </section>
+            <!-- 4. Tabs -->
+            <section class="control-card" id="tabs">
+                <div class="card-header">
+                    <span class="element-number">4</span>
+                    <h2>Tabs</h2>
+                </div>
+                <div class="description">
+                    <strong>Призначення:</strong> Організовують та логічно структурують вміст сторінки за категоріями в межах однієї секції, дозволяючи користувачеві перемикатися між ними без перезавантаження всієї сторінки.
+                </div>
+                <div class="showcase-area">
+                    <span class="showcase-label">Інтерактивний приклад:</span>
+                    <div class="tabs-container">
+                        <div class="tabs-header">
+                            <button type="button" class="tab-btn active" onclick="switchTab(event, 'tab-profile')">Профіль</button>
+                            <button type="button" class="tab-btn" onclick="switchTab(event, 'tab-security')">Безпека</button>
+                            <button type="button" class="tab-btn" onclick="switchTab(event, 'tab-billing')">Підписка</button>
+                        </div>
+                        <div id="tab-profile" class="tab-content active">
+                            Налаштування публічної інформації користувача, зміна фотографії та контактних даних.
+                        </div>
+                        <div id="tab-security" class="tab-content">
+                            Керування безпекою: зміна паролю, активні сесії та налаштування двофакторної автентифікації (2FA).
+                        </div>
+                        <div id="tab-billing" class="tab-content">
+                            Історія фінансових транзакцій, виставлені інвойси та керування прив'язаними картами.
+                        </div>
+                    </div>
+                </div>
+            </section>
 
- <!-- 5. Button -->
- <section class=control-card id=button>
- <div class=card-header>
- <span class=element-number>5</span>
- <h2>Button </h2>
- </div>
- <div class=description>
- <strong>Призначення:</strong> Слугує для ініціації певної дії користувачем: відправки форми, збереження налаштувань, відкриття чи закриття вікон, підтвердження або скасування операції.
- </div>
- <div class=showcase-area>
- <span class=showcase-label>Інтерактивний приклад:</span>
- <div class=btn-variants>
- <button class=btn btn-primary onclick=alert('Дію виконано успішно!')>Зберегти зміни</button>
- <button class=btn btn-secondary>Скасувати</button>
- <button class=btn btn-danger>Видалити акаунт</button>
- </div>
- </div>
- </section>
+            <!-- 5. Button -->
+            <section class="control-card" id="button">
+                <div class="card-header">
+                    <span class="element-number">5</span>
+                    <h2>Button</h2>
+                </div>
+                <div class="description">
+                    <strong>Призначення:</strong> Слугує для ініціації певної дії користувачем: відправки форми, збереження налаштувань, відкриття чи закриття вікон, підтвердження або скасування операції.
+                </div>
+                <div class="showcase-area">
+                    <span class="showcase-label">Інтерактивний приклад (натисніть будь-яку кнопку):</span>
+                    <div class="btn-variants">
+                        <button type="button" class="btn btn-primary" onclick="handleBtnClick('Зберегти зміни', 'success')">💾 Зберегти зміни</button>
+                        <button type="button" class="btn btn-secondary" onclick="handleBtnClick('Скасувати', 'default')">Скасувати</button>
+                        <button type="button" class="btn btn-danger" onclick="handleBtnClick('Видалити акаунт', 'danger')">🗑 Видалити акаунт</button>
+                    </div>
+                    <div class="button-log" id="button-status">
+                        Статус дії: <span>Натисніть на кнопку вище для перевірки</span>
+                    </div>
+                </div>
+            </section>
 
- <!-- 6. Text label -->
- <section class=control-card id=label>
- <div class=card-header>
- <span class=element-number>6</span>
- <h2>Text Label</h2>
- </div>
- <div class=description>
- <strong>Призначення:</strong> Забезпечує текстовий підпис до інших елементів управління (покращуючи юзабіліті та доступність через <code>&lt;label for=...&gt;</code>) або відображає стислий стан системи у вигляді тегів і бейджів.
- </div>
- <div class=showcase-area>
- <span class=showcase-label>Інтерактивний приклад:</span>
- <div class=labels-demo>
- <span class=status-badge badge-success>● Активний</span>
- <span class=status-badge badge-warning>⏳ В очікуванні</span>
- <span class=status-badge badge-info>ℹ Новий реліз</span>
- <label style=font-weight: 600; color: #475569; font-size: 0.9rem;>Мітка пов'язаного поля (Accessible label)</label>
- </div>
- </div>
- </section>
+            <!-- 6. Text label -->
+            <section class="control-card" id="label">
+                <div class="card-header">
+                    <span class="element-number">6</span>
+                    <h2>Text Label</h2>
+                </div>
+                <div class="description">
+                    <strong>Призначення:</strong> Забезпечує текстовий підпис до інших елементів управління (покращуючи юзабіліті та доступність через <code>&lt;label for="..."&gt;</code>) або відображає стислий стан системи у вигляді тегів і бейджів.
+                </div>
+                <div class="showcase-area">
+                    <span class="showcase-label">Інтерактивний приклад:</span>
+                    <div class="labels-demo">
+                        <span class="status-badge badge-success">● Активний</span>
+                        <span class="status-badge badge-warning">⏳ В очікуванні</span>
+                        <span class="status-badge badge-info">ℹ Новий реліз</span>
+                        <label style="font-weight: 600; color: #475569; font-size: 0.9rem;">Мітка пов'язаного поля (Accessible label)</label>
+                    </div>
+                </div>
+            </section>
 
- <!-- 7. Link -->
- <section class=control-card id=link>
- <div class=card-header>
- <span class=element-number>7</span>
- <h2>Link </h2>
- </div>
- <div class=description>
- <strong>Призначення:</strong> Навігаційний компонент, який забезпечує перехід на іншу сторінку, відкриття зовнішнього веб-ресурсу, завантаження файлу або плавний скрол до потрібного блоку на поточній сторінці (якірні лінки).
- </div>
- <div class=showcase-area>
- <span class=showcase-label>Інтерактивний приклад:</span>
- <div class=links-demo>
- <a href=https://github.com target=_blank rel=noopener noreferrer class=custom-link>Перейти на GitHub ↗</a>
- <a href=#radio class=custom-link subtle>Повернутися нагору ↑</a>
- <a href=https://developer.mozilla.org target=_blank rel=noopener noreferrer class=custom-link>Документація MDN Web Docs ↗</a>
- </div>
- </div>
- </section>
+            <!-- 7. Link -->
+            <section class="control-card" id="link">
+                <div class="card-header">
+                    <span class="element-number">7</span>
+                    <h2>Link</h2>
+                </div>
+                <div class="description">
+                    <strong>Призначення:</strong> Навігаційний компонент, який забезпечує перехід на іншу сторінку, відкриття зовнішнього веб-ресурсу, завантаження файлу або плавний скрол до потрібного блоку на поточній сторінці (якірні лінки).
+                </div>
+                <div class="showcase-area">
+                    <span class="showcase-label">Інтерактивний приклад:</span>
+                    <div class="links-demo">
+                        <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="custom-link">Перейти на GitHub ↗</a>
+                        <a href="#radio" class="custom-link subtle">Повернутися нагору ↑</a>
+                        <a href="https://developer.mozilla.org" target="_blank" rel="noopener noreferrer" class="custom-link">Документація MDN Web Docs ↗</a>
+                    </div>
+                </div>
+            </section>
 
- <!-- 8. Tooltip -->
- <section class=control-card id=tooltip>
- <div class=card-header>
- <span class=element-number>8</span>
- <h2>Tooltip</h2>
- </div>
- <div class=description>
- <strong>Призначення:</strong> Відображає коротку контекстну довідку чи пояснення при наведенні курсора миші (hover) або фокусуванні на елементі, заощаджуючи простір основного інтерфейсу.
- </div>
- <div class=showcase-area>
- <span class=showcase-label>Інтерактивний приклад (наведіть курсор):</span>
- <div class=demo-row>
- <div class=tooltip-container>
- <span class=tooltip-target>Наведіть на мене курсор 🔍</span>
- <span class=tooltip-text>Це спливаюча підказка (Tooltip), яка містить роз'яснення чи підказку до інтерфейсу!</span>
- </div>
- </div>
- </div>
- </section>
+            <!-- 8. Tooltip -->
+            <section class="control-card" id="tooltip">
+                <div class="card-header">
+                    <span class="element-number">8</span>
+                    <h2>Tooltip</h2>
+                </div>
+                <div class="description">
+                    <strong>Призначення:</strong> Відображає коротку контекстну довідку чи пояснення при наведенні курсора миші (hover) або фокусуванні на елементі, заощаджуючи простір основного інтерфейсу.
+                </div>
+                <div class="showcase-area">
+                    <span class="showcase-label">Інтерактивний приклад (наведіть курсор):</span>
+                    <div class="demo-row">
+                        <div class="tooltip-container">
+                            <span class="tooltip-target">Наведіть на мене курсор 🔍</span>
+                            <span class="tooltip-text">Це спливаюча підказка (Tooltip), яка містить роз'яснення чи підказку до інтерфейсу!</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
- <!-- 9. Dropdown list -->
- <section class=control-card id=dropdown>
- <div class=card-header>
- <span class=element-number>9</span>
- <h2>Dropdown List</h2>
- </div>
- <div class=description>
- <strong>Призначення:</strong> Компактно відображає великий перелік варіантів вибору у згорнутому вигляді. При кліку розгортає меню вибору одного або декількох пунктів.
- </div>
- <div class=showcase-area>
- <span class=showcase-label>Інтерактивний приклад:</span>
- <div class=dropdown-wrapper>
- <select class=custom-select>
- <option value= disabled selected>Оберіть технологію...</option>
- <option value=html>HTML5 / Web API</option>
- <option value=css>CSS3 / Modern Layouts</option>
- <option value=js>JavaScript (ES6+)</option>
- <option value=ts>TypeScript</option>
- <option value=react>React Framework</option>
- </select>
- </div>
- </div>
- </section>
+            <!-- 9. Dropdown list -->
+            <section class="control-card" id="dropdown">
+                <div class="card-header">
+                    <span class="element-number">9</span>
+                    <h2>Dropdown List</h2>
+                </div>
+                <div class="description">
+                    <strong>Призначення:</strong> Компактно відображає великий перелік варіантів вибору у згорнутому вигляді. При кліку розгортає меню вибору одного або декількох пунктів.
+                </div>
+                <div class="showcase-area">
+                    <span class="showcase-label">Інтерактивний приклад:</span>
+                    <div class="dropdown-wrapper">
+                        <select class="custom-select">
+                            <option value="" disabled selected>Оберіть технологію...</option>
+                            <option value="html">HTML5 / Web API</option>
+                            <option value="css">CSS3 / Modern Layouts</option>
+                            <option value="js">JavaScript (ES6+)</option>
+                            <option value="ts">TypeScript</option>
+                            <option value="react">React Framework</option>
+                        </select>
+                    </div>
+                </div>
+            </section>
 
- <!-- 10. Data grid -->
- <section class=control-card id=datagrid>
- <div class=card-header>
- <span class=element-number>10</span>
- <h2>Data Grid</h2>
- </div>
- <div class=description>
- <strong>Призначення:</strong> Забезпечує структуроване представлення даних у вигляді рядків і колонок. У повноцінних інтерфейсах Data Grid також підтримує сортування, пагінацію та фільтрацію великих масивів інформації.
- </div>
- <div class=showcase-area>
- <span class=showcase-label>Інтерактивний приклад:</span>
- <div class=table-responsive>
- <table class=data-grid-table>
- <thead>
- <tr>
- <th>ID</th>
- <th>Елемент</th>
- <th>Категорія</th>
- <th>Тип вибору</th>
- <th>Статус</th>
- </tr>
- </thead>
- <tbody>
- <tr>
- <td>#001</td>
- <td>Radiobutton</td>
- <td>Вибір</td>
- <td>Один із багатьох</td>
- <td><span class=status-badge badge-success>Реалізовано</span></td>
- </tr>
- <tr>
- <td>#002</td>
- <td>Checkbox</td>
- <td>Вибір</td>
- <td>Множинний вибір</td>
- <td><span class=status-badge badge-success>Реалізовано</span></td>
- </tr>
- <tr>
- <td>#003</td>
- <td>Text Input</td>
- <td>Введення</td>
- <td>Текстове поле</td>
- <td><span class=status-badge badge-success>Реалізовано</span></td>
- </tr>
- <tr>
- <td>#004</td>
- <td>Tabs</td>
- <td>Навігація</td>
- <td>Перемикання контенту</td>
- <td><span class=status-badge badge-success>Реалізовано</span></td>
- </tr>
- <tr>
- <td>#005</td>
- <td>Data Grid</td>
- <td>Відображення</td>
- <td>Табличне представлення</td>
- <td><span class=status-badge badge-success>Реалізовано</span></td>
- </tr>
- </tbody>
- </table>
- </div>
- </div>
- </section>
+            <!-- 10. Data grid -->
+            <section class="control-card" id="datagrid">
+                <div class="card-header">
+                    <span class="element-number">10</span>
+                    <h2>Data Grid</h2>
+                </div>
+                <div class="description">
+                    <strong>Призначення:</strong> Забезпечує структуроване представлення даних у вигляді рядків і колонок. У повноцінних інтерфейсах Data Grid також підтримує сортування, пагінацію та фільтрацію великих масивів інформації.
+                </div>
+                <div class="showcase-area">
+                    <span class="showcase-label">Інтерактивний приклад:</span>
+                    <div class="table-responsive">
+                        <table class="data-grid-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Елемент</th>
+                                    <th>Категорія</th>
+                                    <th>Тип вибору</th>
+                                    <th>Статус</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>#001</td>
+                                    <td>Radiobutton</td>
+                                    <td>Вибір</td>
+                                    <td>Один із багатьох</td>
+                                    <td><span class="status-badge badge-success">Реалізовано</span></td>
+                                </tr>
+                                <tr>
+                                    <td>#002</td>
+                                    <td>Checkbox</td>
+                                    <td>Вибір</td>
+                                    <td>Множинний вибір</td>
+                                    <td><span class="status-badge badge-success">Реалізовано</span></td>
+                                </tr>
+                                <tr>
+                                    <td>#003</td>
+                                    <td>Text Input</td>
+                                    <td>Введення</td>
+                                    <td>Текстове поле</td>
+                                    <td><span class="status-badge badge-success">Реалізовано</span></td>
+                                </tr>
+                                <tr>
+                                    <td>#004</td>
+                                    <td>Tabs</td>
+                                    <td>Навігація</td>
+                                    <td>Перемикання контенту</td>
+                                    <td><span class="status-badge badge-success">Реалізовано</span></td>
+                                </tr>
+                                <tr>
+                                    <td>#005</td>
+                                    <td>Data Grid</td>
+                                    <td>Відображення</td>
+                                    <td>Табличне представлення</td>
+                                    <td><span class="status-badge badge-success">Реалізовано</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
 
- </main>
+        </main>
 
-  <!-- Tab Switching Logic -->
- <script>
- function switchTab(evt, tabId) {
- const tabContents = document.querySelectorAll('.tab-content');
- tabContents.forEach(content => content.classList.remove('active'));
+        <footer>
+            <p>Лабораторна робота: Дослідження та практична реалізація UI Controls • 2026</p>
+        </footer>
+    </div>
 
- const tabButtons = document.querySelectorAll('.tab-btn');
- tabButtons.forEach(btn => btn.classList.remove('active'));
+    <!-- Scripts -->
+    <script>
+        // Tab Switching Logic
+        function switchTab(evt, tabId) {
+            const tabContents = document.querySelectorAll('.tab-content');
+            tabContents.forEach(content => content.classList.remove('active'));
 
- document.getElementById(tabId).classList.add('active');
- evt.currentTarget.classList.add('active');
- }
- </script>
+            const tabButtons = document.querySelectorAll('.tab-btn');
+            tabButtons.forEach(btn => btn.classList.remove('active'));
+
+            document.getElementById(tabId).classList.add('active');
+            evt.currentTarget.classList.add('active');
+        }
+
+        // Button Click Handling
+        function handleBtnClick(actionName, type) {
+            const statusEl = document.getElementById('button-status');
+            const time = new Date().toLocaleTimeString();
+            
+            if (type === 'danger') {
+                statusEl.innerHTML = `Статус дії: <span style="color: #b91c1c;">Викликано дію: "${actionName}" о ${time} ⚠️</span>`;
+            } else if (type === 'success') {
+                statusEl.innerHTML = `Статус дії: <span style="color: #15803d;">Успішно виконано: "${actionName}" о ${time} ✅</span>`;
+            } else {
+                statusEl.innerHTML = `Статус дії: <span style="color: #4f46e5;">Дію скасовано о ${time}</span>`;
+            }
+        }
+    </script>
 </body>
 </html>
